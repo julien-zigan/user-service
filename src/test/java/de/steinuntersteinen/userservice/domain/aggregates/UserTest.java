@@ -80,4 +80,18 @@ class UserTest {
         assertThat(event.oldEmail()).isEqualTo(oldEmail);
         assertThat(event.newEmail()).isEqualTo(newEmail);
     }
+
+    @Test
+    void updatingEmailWithoutNewValueShouldNotEmitEvent() {
+        UserId id = new UserId(UUID.randomUUID());
+        Email sameEmail = new Email("same@email.com");
+
+        User user = User.create(id, sameEmail);
+        user.pullDomainEvents();
+
+        user.changeEmail(sameEmail);
+        List<DomainEvent> events = user.pullDomainEvents();
+
+        assertThat(events).hasSize(0);
+    }
 }
