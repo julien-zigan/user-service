@@ -1,6 +1,8 @@
 spring:
   application:
     name: user-service
+  main:
+    banner-mode: off
 
   datasource:
     url: jdbc:h2:mem:user_service

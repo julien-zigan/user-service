@@ -36,6 +36,10 @@ public class User extends AggregateRoot {
         return user;
     }
 
+    public static User rehydrate(UserId userId, CreatedAt createdAt, Email email, UpdatedAt updatedAt) {
+        return new User(userId, createdAt, email, updatedAt);
+    }
+
     public UserId getUserId() { return userId; }
     public Email getEmail() { return email; }
     public CreatedAt getCreatedAt() { return createdAt; }
